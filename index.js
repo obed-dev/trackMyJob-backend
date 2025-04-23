@@ -28,7 +28,7 @@ app.use(express.json());
 //rutas
 //TODO: auth //crear, login, renew
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/events', require('./routes/events'));
+app.use('/api/jobs', require('./routes/jobs'));
 app.use('*' , (req , res) => { 
      res.sendFile(path.join(__dirname, 'public/index.html'))
 });
