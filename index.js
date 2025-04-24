@@ -10,6 +10,7 @@ console.log(process.env); //para ver las variables de entorno
 
 
 
+
 //crear el servidor de express
 const app = express();
 
