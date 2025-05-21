@@ -142,8 +142,38 @@ const renewToken = async (req, res = response) => {
 };
 
 
+const updateProfile = async (req, res) => { 
+    try {
+        const userId = req.uid;
+        
+
+        const { name, description } = req.body;
+        let updateData = { name, description };
+
+        if (req.file) { 
+            updateData.profileImage = req.file.path;
+        }
+
+        const user = await Usuario.findByIdAndUpdate(userId, updateData, { new: true });
+        console.log("user updated:", user);
+
+        res.json({
+            ok: true,
+            user
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ ok: false, msg: 'Error actualizando perfil' });
+    }
+}
+
+
+
+
 module.exports = {
     createUser,
     loginUser,
-    renewToken
+    renewToken,
+    updateProfile
   }

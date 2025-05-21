@@ -5,8 +5,8 @@ const { Router } =  require('express');
 const { check } = require('express-validator');
 const { validarJWT } = require('../middlewares/validar-jwt');
 const router = Router();
-
-const { createUser , loginUser , renewToken } = require('../controllers/auth');
+const upload = require('../middlewares/upload');
+const { createUser , loginUser , renewToken , updateProfile } = require('../controllers/auth');
 const { validarCampos } = require('../middlewares/validar-campos');
 
 
@@ -31,7 +31,17 @@ router.post("/",
      ] ,
      loginUser);
 
-
+router.put(
+    "/profile",
+    [
+        validarJWT,
+        upload.single('profileImage'), // El campo del form-data debe llamarse 'profileImage'
+        check('name', 'El nombre es obligatorio').not().isEmpty(),
+        
+        validarCampos
+    ],
+    updateProfile
+);
 
 router.get("/new", validarJWT ,renewToken);
 

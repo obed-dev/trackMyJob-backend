@@ -6,13 +6,14 @@ const cors = require('cors');
 const { dbConnection } = require('./database/config');
 
 
-console.log(process.env); //para ver las variables de entorno
+
 
 
 
 
 //crear el servidor de express
 const app = express();
+
 
 //base de datos     
 dbConnection();
@@ -22,6 +23,7 @@ app.use(cors());
 
 //directorio publico
 app.use(express.static('public'));
+app.use('/uploads', express.static('uploads'));
 
 //lectura y parseo del body
 app.use(express.json());

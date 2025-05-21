@@ -14,7 +14,15 @@ const UsuarioSchema = Schema({
         password: {
             type: String,
             required: true,
-        }
+        },
+         description: {
+        type: String,
+        default: ''
+    },
+    profileImage: {
+        type: String,
+        default: ''
+    }
 });
 
 
