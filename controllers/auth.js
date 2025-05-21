@@ -42,7 +42,7 @@ const { email , password } = req.body;
             res.status(201).json({
                 ok: true,
                 msg: 'register',
-                uuid: usuario.id,
+                id: usuario.id,
                 name: usuario.name,
                 token
                
@@ -98,14 +98,16 @@ const loginUser = async (req, res = response ) => {
         res.json({
             ok: true,
             msg: 'login',
-            uuid: usuario.id,
-            name: usuario.name,
-            email: usuario.email,
-             description: usuario.description,
+                id: usuario.id,
+                name: usuario.name,
+                email: usuario.email,
+                description: usuario.description,
                 profileImage: usuario.profileImage,
                 token 
-                
-            });
+            },
+        
+        
+        );
 
 
 
@@ -136,16 +138,18 @@ const renewToken = async (req, res = response) => {
     const token = await generarJWT( uid, name );
     res.json({
       ok: true,
-        user: {
-            uuid: usuario.id,
+           user: {
+            id: usuario.id,
             name: usuario.name,
             email: usuario.email,
-            description: usuario.description,
-            profileImage: usuario.profileImage
+            description: usuario.description, // <-- debe estar aquí
+            profileImage: usuario.profileImage // <-- y aquí
         },
         token
         
+        
     });
+       console.log("renew token", usuario);
        
    
 };
@@ -168,7 +172,7 @@ const updateProfile = async (req, res) => {
 
         res.json({
             ok: true,
-            user
+              user
         });
 
     } catch (error) {
